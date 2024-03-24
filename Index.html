@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Include CSS here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="open-cookie-btn">Open Cookie</button>
+    <div id="fortune-text"></div>
+
+    <script>
+        // Include JavaScript here
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const button = document.getElementById('open-cookie-btn');
+            const display = document.getElementById('fortune-text');
+
+            const fortunes = [
+                "Do not be afraid of competition.",
+                "An exciting opportunity lies ahead of you.",
+                // Add more fortunes here
+            ];
+
+            button.addEventListener('click', function() {
+                const randomIndex = Math.floor(Math.random() * fortunes.length);
+                display.textContent = fortunes[randomIndex];
+            });
+        });
+    </script>
+</body>
+</html>
