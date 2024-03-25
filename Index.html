@@ -1,38 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Fortune Cookie</title>
     <style>
-        /* Include CSS here */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Press Start 2P', cursive;
+            background-color: #000;
+            color: #ff00ff;
+            text-align: center;
+            padding: 50px;
+        }
+        button {
+            background-color: #ff00ff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+        }
+        #fortune {
+            margin-top: 20px;
+            color: #00ffff;
+            min-height: 22px;
         }
     </style>
 </head>
 <body>
 
-    <button id="open-cookie-btn">Open Cookie</button>
-    <div id="fortune-text"></div>
+<button id="openButton" onclick="openFortuneCookie()">Open Fortune Cookie</button>
+<div id="fortune"></div>
 
-    <script>
-        // Include JavaScript here
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const button = document.getElementById('open-cookie-btn');
-            const display = document.getElementById('fortune-text');
+<script>
+    const fortunes = [
+        "An exciting opportunity lies ahead of you.",
+        "You will discover an unexpected treasure.",
+        "A dream you have will come true.",
+        "Someone will call you today with great news.",
+        "Your ability to juggle many tasks will take you far.",
+        "A distant friend will bring you a surprising message.",
+        "You will travel to many exotic places in your lifetime.",
+        "Your most memorable dream will come true.",
+        "Someone is looking up to you for your strength.",
+        "Courage is not simply one of the virtues, but the form of every virtue at the testing point."
+    ];
+    let opened = false;
 
-            const fortunes = [
-                "Do not be afraid of competition.",
-                "An exciting opportunity lies ahead of you.",
-                // Add more fortunes here
-            ];
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
 
-            button.addEventListener('click', function() {
-                const randomIndex = Math.floor(Math.random() * fortunes.length);
-                display.textContent = fortunes[randomIndex];
-            });
-        });
-    </script>
+    function openFortuneCookie() {
+        if (!opened) {
+            document.getElementById("openButton").innerHTML = "Opening fortune cookie...";
+            setTimeout(function() {
+                shuffleArray(fortunes);
+                document.getElementById("fortune").innerHTML = fortunes.pop();
+                document.getElementById("openButton").innerHTML = "Open another cookie";
+                opened = true;
+                setInterval(function() {
+                    if (fortunes.length == 0) return;
+                    document.getElementById("fortune").innerHTML = fortunes.pop();
+                }, 10000);
+            }, 3000);
+        }
+    }
+</script>
+
 </body>
 </html>
